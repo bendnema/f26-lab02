@@ -24,11 +24,11 @@ class AvailabilityProperties {
     /** Provided example: every returned free slot is genuinely free (overlaps no booking). */
     @Property
     void freeSlotsNeverOverlapABooking(@ForAll("scenarios") Scenario s) {
-        List<TimeInterval> free = calc.freeSlots(s.dayStart(), s.dayEnd(), s.bookings());
-        for (TimeInterval slot : free) {
-            for (TimeInterval booking : s.bookings()) {
-                assertFalse(slot.overlaps(booking),
-                    () -> "free slot " + slot + " overlaps booking " + booking);
+        List<TimeInterval> free = calc.freeSlots(s.dayStart(), s.dayEnd(), s.bookings()); // generates a list of free slots
+        for (TimeInterval slot : free) { // goes through each free slot
+            for (TimeInterval booking : s.bookings()) { // goes through the bookings in each slot
+                assertFalse(slot.overlaps(booking), // checks if the free slot overlaps with the booking, if it does, it fails the test
+                    () -> "free slot " + slot + " overlaps booking " + booking); // if the free slot overlaps with the booking, it fails the test and prints a message
             }
         }
     }
