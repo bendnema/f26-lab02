@@ -35,3 +35,15 @@ green once you fix it.
 - Setup: `SETUP.md`
 
 See the Lab 2 handout on the course page for the three milestones you show a TA.
+
+## Milestone 3: why the old test suite missed the bug
+
+1. Five tests `fullyBookedDayHasNoFreeSlots`, `bookingUntilEndOfDayLeavesTheMorningFree`,
+`gapsBetweenBookingsAreReturned`, `unsortedBookingsAreHandled`, and
+`overlappingBookingsAreMerged` in AvailbilityCalculatorTest.java end its final booking on day end, so theres no missing gap check, so the input never exposes the bug.  
+
+2. On `returnedSlotsNeverOverlapABooking` the 6th although the final book is 600-660, the method dropped the rest of slot, and although it triggers the bug, the assertion only iterates on the returned list and if the returned slots overlap the booking. Since the dropped slot isn't in the the list it isn't able to check it and it comes back as correct
+
+3. Finally the none of the test passes an empty booking list, which is an issue because if a whole day is free it will return a empty list with no times because it didn't througly check all the way to the end of day booking
+
+Coverage didn't help because it measures whether a statment/method is executed and checked in the testing suit. Since no line could should up as red in the testing and every line ran, it came back as highly covered.
