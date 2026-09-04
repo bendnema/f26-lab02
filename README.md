@@ -10,6 +10,10 @@ whether green actually means correct.
 
 **Read `ARCHITECTURE.md` before the code.**
 
+## Tools used
+
+Claude Code (CLI), model Claude Opus 5.
+
 ## Build and test
 
 ```
